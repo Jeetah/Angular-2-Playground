@@ -1,0 +1,6 @@
+{
+  "name": "Angular 2 Playground",
+  "tagline": "Mainly based on the Tour of Heroes Tutorial",
+  "body": "# Angular-2-Playground\r\nMainly based on the official \"Tour of Heroes\" tutorials (merged into one project)\r\n\r\n## Shows\r\n- All basic Angular 2 features according to official quick & long tutorials as well as the developer guide \r\n- Reactive Streams (especially type-ahead) for search against Wikipedia API\r\n\r\n## Includes\r\n- Json Mock Server as \"backend\"\r\n\r\n## Work in progress\r\n- Ng2-Bootstrap Showcases\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
