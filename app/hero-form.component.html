@@ -1,0 +1,51 @@
+<div class="container">
+    <div  [hidden]="submitted">
+    <h1>Hero Form</h1>
+    <!-- container, form-group, form-control, and btn from Bootstrap -->
+    <form *ngIf="active" (ngSubmit)="onSubmit()" #heroForm="ngForm">
+        {{diagnostic}}
+        <div class="form-group">
+            <label for="name">Name</label>
+            <!-- ([]) = two-way binding; NgControl updates with NG css classes -->
+            <input type="text"  class="form-control" required [(ngModel)]="model.name" #nameInput="ngForm" ngControl="nameCtrl" #spy1/> <!-- spy is here assigned the whole path classes -->
+            Diagnostic value output: {{model.name}}<br>State'n'classes output: {{spy1.className}}
+        </div>
+        <div [hidden]="nameInput.valid || nameInput.pristine" class="alert alert-danger"> <!-- pristine since we arrive here with empty box -->
+            Name is required
+        </div>
+        <div class="form-group">
+            <label for="alterEgo">Alter Ego</label>
+            <!-- That's the same as the ([]) above! -> Details: https://angular.io/docs/ts/latest/guide/forms.html -->
+            <input type="text" class="form-control"
+                   [ngModel]="model.alterEgo"
+                   (ngModelChange)="model.alterEgo = $event" ngControl="alterEgoCtrl" #spy2/> <!-- spy via local template variable (which is available in element and sibling) - can also be written as var-spy -->
+            State'n'classes output: {{spy2.className}}
+        </div>
+        <div class="form-group">
+            <label for="power">Hero Power</label>
+            <select class="form-control" required>
+                <option *ngFor="#p of powers" [value]="p">{{p}}</option>
+            </select>
+        </div>
+        <button type="button" class="btn btn-default" (click)="newHero()">New Hero</button>
+        <button type="submit" class="btn btn-default" [disabled]="!heroForm.form.valid">Submit</button>
+    </form>
+    </div>
+    <div [hidden]="!submitted">
+        <h2>You submitted the following:</h2>
+        <div class="row">
+            <div class="col-xs-3">Name</div>
+            <div class="col-xs-9  pull-left">{{ model.name }}</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-3">Alter Ego</div>
+            <div class="col-xs-9 pull-left">{{ model.alterEgo }}</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-3">Power</div>
+            <div class="col-xs-9 pull-left">{{ model.power }}</div>
+        </div>
+        <br>
+        <button class="btn btn-default" (click)="submitted=false">Edit</button>
+    </div>
+</div>

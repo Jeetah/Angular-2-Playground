@@ -1,0 +1,19 @@
+<h1>{{title}}</h1>
+<h2>My Heroes</h2>
+<ul class="heroes">
+    <!-- The (*) prefix to structural directive ngFor indicates that the <li> element and its children constitute a master template.
+    () = Event Binding (one way = view to model); [] = Property Binding (one way = model to view) -->
+    <li *ngFor="#hero of heroes"
+        (click)="onSelect(hero)"
+        [class.selected]="hero === selectedHero">
+        <span class="badge">{{hero.id}}</span> {{hero.name}}
+    </li>
+</ul>
+<div *ngIf="selectedHero">
+    <!-- pipes for direct manipulation -->
+    <h2>
+        {{selectedHero.name | uppercase}} is my hero
+    </h2>
+    <button (click)="gotoDetail(selectedHero)">View Details</button>
+</div>
+<hero-add>...</hero-add>

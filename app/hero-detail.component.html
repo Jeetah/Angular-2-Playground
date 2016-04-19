@@ -1,0 +1,23 @@
+<div *ngIf="hero">
+    <h2>{{hero.name}} details!</h2>
+    <div><label>ID: </label>{{hero.id}}</div>
+    <div>
+        <label>Name: </label>
+        <!-- Local Template Vars work only if firing event - e.g. dummy event like (keyup)="0", can be also given to event like (keyup)="onKey(localTemplateVar.value) -->
+        <!-- enter is an Angular pseudo-event (this way we can easily filter) -->
+        <input #newHero [(ngModel)]="hero.name" (keyup)="onKey($event)"
+               (keyup.enter)="onKeyEnter($event)" placeholder="name"/>
+        <p>Live local template var from input: '{{newHero.value}}'</p>
+    </div>
+    <br>
+    <h4>directive example: Pick a highlight color</h4>
+    <div>
+        <!-- The 'color' (source!) property is automatically made available to the component and usable in e.g. directive  - no need to declare it explicitly. Only target props need to be made excplicitly available via [] -->
+        <input type="radio" name="colors" (click)="color='lightgreen'">Green
+        <input type="radio" name="colors" (click)="color='yellow'">Yellow
+        <input type="radio" name="colors" (click)="color='cyan'">Cyan
+    </div>
+    <span [myHighlight]="color" [defaultColor]='violet'>Some example for mouse over and own directives</span>
+    <br>
+    <button (click)="goBack()">Back</button>
+</div>

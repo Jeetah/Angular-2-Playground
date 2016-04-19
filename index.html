@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- We must add a <base href> element tag to the index.html to make pushState routing work. The browser also needs the base href value to prefix relative URLs when downloading and linking to css files, scripts, and images. -->
+    <base href="/">
+    <title>Angular 2 Tour of Heroes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSS Styles (order is important!) -->
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="forms.css">
+
+    <!-- 1. Load libraries -->
+    <!-- IE required polyfills, in this exact order -->
+    <script src="node_modules/es6-shim/es6-shim.min.js"></script>
+    <script src="node_modules/systemjs/dist/system-polyfills.js"></script>
+
+    <!-- can also be loaded from CDN: <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.33.3/es6-shim.min.js"></script> -->
+
+    <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
+    <script src="node_modules/rxjs/bundles/Rx.js"></script>
+    <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
+    <!-- for routing - after NG2! -->
+    <script src="node_modules/angular2/bundles/router.dev.js"></script>
+    <!-- HTTP is in own script-->
+    <script src="node_modules/angular2/bundles/http.dev.js"></script>
+
+    <script src="node_modules/ng2-bootstrap/bundles/ng2-bootstrap.min.js"></script>
+
+
+    <!-- 2. Configure SystemJS -->
+    <!-- on the fly transcompile without watching:
+               System.config({
+                   transpiler: 'typescript',
+                   typescriptOptions: { emitDecoratorMetadata: true },
+                   packages: {'app': {defaultExtension: 'ts'}}
+               });
+       -->
+    <script>
+        System.config({
+            packages: {
+                app: {
+                    format: 'register',
+                    defaultExtension: 'js'
+                }
+            },
+            // Ng2-Bootstrap: Datepicker
+            map: {
+                moment: 'node_modules/moment/moment.js'
+            }
+        });
+        System.import('app/main')
+                .then(null, console.error.bind(console));
+    </script>
+</head>
+
+<!-- 3. Display the application -->
+<body>
+<heroes-app>
+    <!-- Unlike Angular 1, Angular 2 does not compile/process bindings in index.html. This is mainly for security reasons, as well as architectural changes in Angular 2. This means that index.html can safely be processed using server-side technologies such as bindings > -->
+</heroes-app>
+</body>
+</html>
+
+
+<!--
+Copyright 2016 Google Inc. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://angular.io/license
+-->

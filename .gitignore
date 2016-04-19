@@ -1,0 +1,7 @@
+*.js
+*.log
+*.iml
+*.map
+node_modules
+gradlew.bat
+.gradle
