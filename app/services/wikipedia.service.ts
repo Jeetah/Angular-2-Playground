@@ -10,7 +10,8 @@ export class WikipediaService {
     
     constructor(private jsonp: Jsonp) {}
     
-    search (term: string):Observable<String[]> {
+    searchObserve (term: string):Observable<String[]> {
+        console.debug("Preparing Observable against Wikipedia...");
         let wikiUrl = 'http://en.wikipedia.org/w/api.php';
         var params = new URLSearchParams();
         params.set('search', term); // the user's search value
@@ -19,7 +20,8 @@ export class WikipediaService {
         params.set('callback', 'JSONP_CALLBACK');
         return this.jsonp
             .get(wikiUrl, { search: params })
-            .map(request => <string[]> request.json()[1]) 
+            .map(request => <string[]> request.json()[1])
+            .do(x => console.debug(x))
             .catch(this.handleError);
     }
     

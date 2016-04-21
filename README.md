@@ -2,11 +2,12 @@
 Mainly based on the official "Tour of Heroes" tutorials (merged into one project)
 
 ## Shows
-- All basic Angular 2 features according to official quick & long tutorials as well as the developer guide 
-- Reactive Streams (especially type-ahead) for search against Wikipedia API
+- Nearly all basic Angular 2 features according to official quick & long tutorials as well as the developer guide 
+- RxJs Reactive Streams (especially type-ahead) for search against Wikipedia API
+- Ng2-Bootstrap Typeahead Search
 
 ## Includes
 - Json Mock Server as "backend"
 
 ## Work in progress
-- Ng2-Bootstrap Showcases
+- Further Ng2-Bootstrap Showcases
