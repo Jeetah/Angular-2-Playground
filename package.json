@@ -11,7 +11,7 @@
     "npm_list" : "npm list",
     "startLiteServer": "lite-server",
     "startMockBackend": "json-server --port 3001 --watch ./test/db.json",
-    "startWithMock": "concurrently \"npm run startMockBackend\" \"npm run tsc_watch\" \"npm run startLiteServer\""
+    "_start": "concurrently \"npm run startMockBackend\" \"npm run tsc_watch\" \"npm run startLiteServer\""
   },
   "license": "ISC",
   "dependencies": {

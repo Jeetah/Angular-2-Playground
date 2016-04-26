@@ -1,7 +1,10 @@
 import { Component }       from 'angular2/core';
 import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/router';
+import { Title }     from 'angular2/platform/browser';
+
 import { HeroService }     from './../services/hero.service';
 import { Logger }     from './../services/logger.service';
+
 import { HeroesComponent }     from './heroes.component';
 import { HeroDetailComponent}     from './hero-detail.component';
 import { DashboardComponent }     from './dashboard.component';
@@ -57,7 +60,17 @@ import { WikiComponent }     from './wiki-search.component';
     },
 ])
 export class AppComponent implements CanDeactivate {
-    title = 'Tour of Heroes';
+
+    // always use title service - never manipulate DOM (else NG2 would be not easily able to run outside browser)!
+    public constructor(private _titleService: Title ) { }
+
+    public setTitle( newTitle: string) {
+        this._titleService.setTitle( newTitle );
+    }
+
+    ngOnInit() {
+        this.setTitle('Tour of Heroes');
+    }
 
     routerCanDeactivate(next: ComponentInstruction, prev: ComponentInstruction) {
         return confirm('Are you sure you want to leave?');
