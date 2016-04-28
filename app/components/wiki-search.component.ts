@@ -27,12 +27,13 @@ import {WikipediaService} from './../services/wikipedia.service';
     </ul>
      <h1>Ng2-Bootstrap Static States Demo</h1>
     <p><i>Fetches when typing stops</i></p>
-    <pre class="card card-block card-header">Model: {{searchTermBS | json}}</pre>
+    <pre class="card card-block card-header">Model: {{asyncSelectedState | json}}</pre>
     <input [(ngModel)]="asyncSelectedState"
            [typeahead]="getAsyncDataStates(getContext())"
            (typeaheadLoading)="changeTypeaheadLoadingStates($event)"
            (typeaheadNoResults)="changeTypeaheadNoResultsStates($event)"
            (typeaheadOnSelect)="typeaheadOnSelectStates($event)"
+           [typeaheadMinLength]="1"
            [typeaheadOptionsLimit]="7"           
            class="form-control">
     <div *ngIf="typeaheadLoadingStates===true">
@@ -43,13 +44,14 @@ import {WikipediaService} from './../services/wikipedia.service';
     </div>
     <h1>Ng2-Bootstrap Wikipedia Demo</h1>
     <p><i>Fetches when typing stops</i></p>
-    <pre class="card card-block card-header">Model: {{searchTermBS | json}}</pre>
+    <pre class="card card-block card-header">Model: {{asyncSelectedWiki | json}}</pre>
     <input [(ngModel)]="asyncSelectedWiki"
            [typeahead]="getAsyncDataWikiRef"
            (typeaheadLoading)="changeTypeaheadLoadingWiki($event)"
            (typeaheadNoResults)="changeTypeaheadNoResultsWiki($event)"
            (typeaheadOnSelect)="typeaheadOnSelectWiki($event)"
            [typeaheadWaitMs]="300"
+           [typeaheadMinLength]="1"
            [typeaheadOptionsLimit]="7"           
            class="form-control">
     <div *ngIf="typeaheadLoadingWiki===true">
@@ -67,7 +69,6 @@ export class WikiComponent {
     }
 
     private items:Observable<string[]>;
-
     search(term:string) {
         this._logger.debug(`Searching stupid for ${term}`);
         this.items = this._wikipediaService.searchObserve(term);
@@ -79,7 +80,6 @@ export class WikiComponent {
         .distinctUntilChanged()
         .switchMap((term:string) => this._wikipediaService.searchObserve(term)) // cancel previous requests
         .catch(this.handleError);
-
     searchSmart(term:string) {
         this._logger.debug(`Searching smart for ${term}`);
         this._searchTermStream.next(term);
@@ -87,15 +87,13 @@ export class WikiComponent {
 
     private _cacheStates:any;
     private _prevContextStates:any;
-    public asyncSelectedState:string = '';
-    public typeaheadLoadingStates:boolean = false;
+    public asyncSelectedState:string='';
+    public typeaheadLoadingStates:boolean=false;
+    public typeaheadNoResultsStates:boolean=false;
 
-    public typeaheadNoResultsStates:boolean = false;
-    private _cacheWiki:any;
-    private _prevContextWiki:any;
-    public asyncSelectedWiki:string = '';
-    public typeaheadLoadingWiki:boolean = false;
-    public typeaheadNoResultsWiki:boolean = false;
+    public asyncSelectedWiki:string='';
+    public typeaheadLoadingWiki:boolean=false;
+    public typeaheadNoResultsWiki:boolean=false;
 
     public typeaheadLoading:boolean = false;
 
@@ -115,38 +113,33 @@ export class WikiComponent {
 
     public getAsyncDataStates(context:any):Function {
         if (this._prevContextStates === context) {
-            this._logger.debug("States: Nothing changed - serving from cache...");
             return this._cacheStates;
         }
 
         this._prevContextStates = context;
         let f:Function = function ():Promise<string[]> {
             let p:Promise<string[]> = new Promise((resolve:Function) => {
-                setTimeout(() => {
+                 setTimeout(() => {
                     let query = new RegExp(context.asyncSelectedState, 'ig');
                     return resolve(context.statesStatic.filter((state:any) => {
-                        console.debug("States: Searching states async bootstrap: " + context.asyncSelectedState);
+                        context._logger.debug("States: Searching states async bootstrap: " + context.asyncSelectedState);
                         return query.test(state);
                     }));
-                }, 200);
+                 }, 200);
             });
             return p;
         };
+
         this._cacheStates = f;
         return this._cacheStates;
     }
 
+    // Dangerous!
     public getAsyncDataWikiRef = this.getAsyncDataWiki.bind(this);
 
-    public getAsyncDataWiki(context:any):Promise {
-        if (this._prevContextWiki === context) {
-            this._logger.debug("Wiki: Nothing changed - serving from cache...");
-            return this._cacheWiki;
-        }
-
-        console.info("Wiki: Searching Wikipedia async bootstrap: " + this.asyncSelectedWiki);
-        this._cacheWiki = this._wikipediaService.searchObserve(this.asyncSelectedWiki).toPromise();
-        return this._cacheWiki;
+    public getAsyncDataWiki():Promise<string[]> {
+        this._logger.debug("Wiki: Searching Wikipedia async bootstrap: " + this.asyncSelectedWiki);
+        return this._wikipediaService.searchObserve(this.asyncSelectedWiki).toPromise();
     }
 
     private handleError(error:Response) {

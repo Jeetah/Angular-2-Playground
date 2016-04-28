@@ -10,7 +10,7 @@ export class WikipediaService {
     
     constructor(private jsonp: Jsonp) {}
     
-    searchObserve (term: string):Observable<String[]> {
+    searchObserve (term: string):Observable<string[]> {
         console.debug("Preparing Observable against Wikipedia...");
         let wikiUrl = 'http://en.wikipedia.org/w/api.php';
         var params = new URLSearchParams();
@@ -21,7 +21,7 @@ export class WikipediaService {
         return this.jsonp
             .get(wikiUrl, { search: params })
             .map(request => <string[]> request.json()[1])
-            .do(x => console.debug(x))
+            .do(x => console.debug(x.toString()))
             .catch(this.handleError);
     }
     

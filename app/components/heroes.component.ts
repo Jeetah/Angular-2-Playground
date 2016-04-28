@@ -43,7 +43,8 @@ export class HeroesComponent implements OnInit {
                 // Observable returned
                 .subscribe(
                     heroes => this.heroes = heroes,
-                    error =>  this.errorMessage = <any>error);
+                    error =>  this._logger.error(error)
+                );
     }
 
     onSelect(hero: Hero) {

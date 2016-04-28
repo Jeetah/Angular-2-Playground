@@ -1,14 +1,14 @@
 import {Hero} from "./hero";
 
 export var HEROES: Hero[] = [
-    { "id": 1, "name": "Mr. Nice","power": "Being nice" },
-    { "id": 2, "name": "Narco", "power":"Being narcotic" },
-    { "id": 3, "name": "Bombasto" ,"power":"Boombastic!"},
-    { "id": 4, "name": "Celeritas", "power":"Celeriting!" },
-    { "id": 5, "name": "Magneta","power": "Canot get off metal" },
-    { "id": 6, "name": "RubberMan", "power":"RubbDiDuck" },
-    { "id": 7, "name": "Dynama" , "power":"Depends"},
-    { "id": 8, "name": "Dr IQ" ,"power": "Thinking!"},
-    { "id": 9, "name": "Magma" ,"power": "Hot!"},
-    { "id": 10, "name": "Tornado" , "power":"Devastating"}
+    new Hero( 1, "Mr. Nice", "Being nice" ),
+    new Hero( 2, "Narco", "Being narcotic" ),
+    new Hero( 3, "Bombasto","Boombastic!"),
+    new Hero( 4, "Celeritas","Celeriting!"),
+    new Hero( 5, "Magneta","Canot get off metal"),
+    new Hero( 6, "RubberMan", "RubbDiDuck"),
+    new Hero( 7, "Dynama", "Depends"),
+    new Hero( 8, "Dr IQ" , "Thinking!"),
+    new Hero( 9, "Magma" , "Hot!"),
+    new Hero( 10, "Tornado", "Devastating")
 ];

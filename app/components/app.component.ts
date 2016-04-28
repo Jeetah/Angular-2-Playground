@@ -1,5 +1,5 @@
 import { Component }       from 'angular2/core';
-import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/router';
+import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS, CanDeactivate, ComponentInstruction } from 'angular2/router';
 import { Title }     from 'angular2/platform/browser';
 
 import { HeroService }     from './../services/hero.service';
