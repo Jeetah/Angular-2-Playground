@@ -1,6 +1,6 @@
-import { Component }       from 'angular2/core';
-import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS, CanDeactivate, ComponentInstruction } from 'angular2/router';
-import { Title }     from 'angular2/platform/browser';
+import { Component}  from '@angular/core';
+import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS, CanDeactivate, ComponentInstruction } from '@angular/router-deprecated';
+import { Title }     from '@angular/platform-browser';
 
 import { HeroService }     from './../services/hero.service';
 import { Logger }     from './../services/logger.service';
@@ -70,6 +70,14 @@ export class AppComponent implements CanDeactivate {
 
     ngOnInit() {
         this.setTitle('Tour of Heroes');
+    }
+
+    ngAfterContentInit() {
+        console.log("After Content Init!");
+    }
+
+    ngAfterViewInit():void {
+        console.log("After ViewInit!");
     }
 
     routerCanDeactivate(next: ComponentInstruction, prev: ComponentInstruction) {

@@ -9,5 +9,9 @@ Mainly based on the official "Tour of Heroes" tutorials (merged into one project
 ## Includes
 - Json Mock Server as "backend"
 
+## Based on
+- Angular2 RC1
+- NG2-Bootstrap Beta 17
+
 ## Work in progress
 - Further Ng2-Bootstrap Showcases

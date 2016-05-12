@@ -1,7 +1,9 @@
-import {bootstrap, Title} from 'angular2/platform/browser';
+// no extensio needed since SystemJS is configured to use ".js" as ending
+import {bootstrap} from '@angular/platform-browser-dynamic';
+import {Title} from '@angular/platform-browser';
 import {AppComponent} from "./components/app.component";
-import {HTTP_PROVIDERS} from 'angular2/http';
-//import {enableProdMode} from 'angular2/core';
+import {HTTP_PROVIDERS} from '@angular/http';
+//import {enableProdMode} from '@angular2/core';
 import {Logger} from "./services/logger.service";
 // Add all operators to Observable (could be also stripped down to single methods to save bandwidth)
 import 'rxjs/Rx';

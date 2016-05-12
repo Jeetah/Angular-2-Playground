@@ -1,8 +1,8 @@
-import {Component}        from 'angular2/core';
-import {JSONP_PROVIDERS, Response}  from 'angular2/http';
+import {Component}        from '@angular/core';
+import {JSONP_PROVIDERS, Response}  from '@angular/http';
 import {Observable}       from 'rxjs/Observable';
 import {Subject}          from 'rxjs/Subject';
-import {CORE_DIRECTIVES, FORM_DIRECTIVES} from 'angular2/common';
+import {CORE_DIRECTIVES, FORM_DIRECTIVES} from '@angular/common';
 import {TYPEAHEAD_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 
 

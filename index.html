@@ -18,41 +18,25 @@
 
     <!-- can also be loaded from CDN: <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.33.3/es6-shim.min.js"></script> -->
 
-    <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
+    <script src="node_modules/zone.js/dist/zone.js"></script>
+    <script src="node_modules/reflect-metadata/Reflect.js"></script>
     <script src="node_modules/systemjs/dist/system.src.js"></script>
-    <script src="node_modules/rxjs/bundles/Rx.js"></script>
+
+    <!-- Old NG2 before RC
+    <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
     <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
-    <!-- for routing - after NG2! -->
+    &lt;!&ndash; for routing - after NG2! &ndash;&gt;
     <script src="node_modules/angular2/bundles/router.dev.js"></script>
-    <!-- HTTP is in own script-->
+    &lt;!&ndash; HTTP is in own script&ndash;&gt;
     <script src="node_modules/angular2/bundles/http.dev.js"></script>
+    -->
 
     <script src="node_modules/ng2-bootstrap/bundles/ng2-bootstrap.min.js"></script>
 
-
     <!-- 2. Configure SystemJS -->
-    <!-- on the fly transcompile without watching:
-               System.config({
-                   transpiler: 'typescript',
-                   typescriptOptions: { emitDecoratorMetadata: true },
-                   packages: {'app': {defaultExtension: 'ts'}}
-               });
-       -->
+    <script src="systemjs.config.js"></script>
     <script>
-        System.config({
-            packages: {
-                app: {
-                    format: 'register',
-                    defaultExtension: 'js'
-                }
-            },
-            // Ng2-Bootstrap: Datepicker
-            map: {
-                moment: 'node_modules/moment/moment.js'
-            }
-        });
-        System.import('app/main')
-                .then(null, console.error.bind(console));
+        System.import('app').catch(function(err){ console.error(err); });
     </script>
 </head>
 

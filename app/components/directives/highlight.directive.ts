@@ -1,4 +1,4 @@
-import {Directive, ElementRef, Input} from 'angular2/core';
+import {Directive, ElementRef, Input} from '@angular/core';
 @Directive({
     selector: '[myHighlight]',
     // The host property refers to the DOM element that hosts our attribute directive
